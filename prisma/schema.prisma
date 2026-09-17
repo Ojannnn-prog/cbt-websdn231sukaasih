@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  STUDENT
+}
+
+model User {
+  id            String        @id @default(cuid())
+  username      String        @unique
+  password      String
+  role          Role          @default(STUDENT)
+  isActive      Boolean       @default(true)
+  name          String?
+  absenNumber   Int?
+  lastActive    DateTime?
+  failedLogin   Int           @default(0)
+  cooldownUntil DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  attempts      ExamAttempt[]
+}
+
+model Exam {
+  id          String        @id @default(cuid())
+  title       String
+  description String?
+  duration    Int           @default(90)
+  isPublished Boolean       @default(true)
+  expiresAt   DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  questions   Question[]
+  attempts    ExamAttempt[]
+}
+
+model Question {
+  id            String        @id @default(cuid())
+  examId        String
+  text          String
+  optionA       String
+  optionB       String
+  optionC       String
+  optionD       String
+  correctOption String
+  createdAt     DateTime      @default(now())
+  exam          Exam          @relation(fields: [examId], references: [id], onDelete: Cascade)
+  answers       Answer[]
+}
+
+model ExamAttempt {
+  id             String    @id @default(cuid())
+  userId         String
+  examId         String
+  startTime      DateTime  @default(now())
+  endTime        DateTime?
+  score          Float?
+  totalCorrect   Int?
+  totalQuestions Int?
+  questionOrder  String[]
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exam           Exam      @relation(fields: [examId], references: [id], onDelete: Cascade)
+  answers        Answer[]
+
+  @@index([userId, examId])
+}
+
+model Answer {
+  id             String      @id @default(cuid())
+  attemptId      String
+  questionId     String
+  selectedOption String?
+  isCorrect      Boolean     @default(false)
+  updatedAt      DateTime    @updatedAt
+  attempt        ExamAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question       Question    @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([attemptId, questionId])
+}
