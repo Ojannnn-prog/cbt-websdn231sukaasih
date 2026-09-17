@@ -248,3 +248,24 @@ img, svg, video, canvas { max-width: 100%; }
   .cookie-actions { margin-top: .8rem; }
   .cookie-actions button { flex: 1; font-size: .72rem; padding: .65rem .45rem; }
 }
+
+/* Long question and option text must wrap inside the mobile exam card. */
+.exam-layout > *, .question-panel, .answer-list, .answer-option { min-width: 0; }
+.question-panel h2, .answer-option > span:last-child, .exam-topbar h1, .view-question strong, .view-options span, .exam-card h2, .exam-card p { overflow-wrap: anywhere; word-break: break-word; }
+.answer-option { align-items: flex-start; }
+.answer-option > span:last-child { min-width: 0; line-height: 1.45; }
+.option-key { flex: 0 0 30px; }
+.panel-heading-actions { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; justify-content: flex-end; }
+#student-print-sheet { display: none; }
+@media print {
+  @page { size: landscape; margin: 12mm; }
+  body * { visibility: hidden !important; }
+  #student-print-sheet, #student-print-sheet * { visibility: visible !important; }
+  #student-print-sheet { display: block !important; position: absolute; inset: 0; width: 100%; color: #111; background: #fff; }
+  #student-print-sheet h1 { margin: 0 0 4px; font-size: 22px; }
+  #student-print-sheet p { margin: 0 0 14px; font-size: 11px; }
+  #student-print-sheet table { width: 100%; min-width: 0; border-collapse: collapse; font-size: 11px; }
+  #student-print-sheet th, #student-print-sheet td { border: 1px solid #111; padding: 6px; text-align: left; overflow-wrap: anywhere; }
+  #student-print-sheet th { background: #eee; }
+}
+@media (max-width: 600px) { .panel-heading-actions { width: 100%; justify-content: space-between; } .print-button { flex: 1; } }
