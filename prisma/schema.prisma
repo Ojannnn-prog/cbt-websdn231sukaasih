@@ -51,6 +51,7 @@ model Question {
   optionC       String
   optionD       String
   correctOption String
+  imageData     String?   @db.Text
   createdAt     DateTime      @default(now())
   exam          Exam          @relation(fields: [examId], references: [id], onDelete: Cascade)
   answers       Answer[]

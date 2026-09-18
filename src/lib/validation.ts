@@ -12,6 +12,7 @@ export const questionSchema = z.object({
   optionC: z.string().trim().min(1).max(500),
   optionD: z.string().trim().min(1).max(500),
   correctOption: z.enum(["A", "B", "C", "D"]),
+  imageData: z.string().regex(/^data:image\/(png|jpeg|webp);base64,/, "Format gambar tidak valid.").max(2_000_000, "Ukuran gambar terlalu besar.").nullable().optional().default(null),
 });
 
 export const examSchema = z.object({
