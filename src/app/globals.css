@@ -269,35 +269,3 @@ img, svg, video, canvas { max-width: 100%; }
   #student-print-sheet th { background: #eee; }
 }
 @media (max-width: 600px) { .panel-heading-actions { width: 100%; justify-content: space-between; } .print-button { flex: 1; } }
-/* Camera permission and image-based question UI. */
-.camera-box { border: 2px solid var(--ink); background: #fff; padding: .8rem; display: grid; gap: .7rem; }
-.camera-preview-wrap { position: relative; background: #111; aspect-ratio: 16 / 9; overflow: hidden; }
-.camera-preview { display: block; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
-.camera-live-badge { position: absolute; top: .5rem; right: .5rem; background: var(--red); border: 2px solid var(--ink); padding: .25rem .45rem; font-size: .65rem; font-weight: 900; }
-.camera-live-badge i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #fff; margin-right: .25rem; }
-.camera-copy strong { display: flex; align-items: center; gap: .35rem; font-size: .82rem; }
-.camera-copy p { margin: .3rem 0 0; color: var(--muted); font-size: .75rem; line-height: 1.4; }
-.camera-error { margin-top: .5rem; color: #b42318; font-size: .75rem; display: flex; gap: .35rem; align-items: flex-start; }
-.camera-button { width: 100%; }
-.camera-ready { color: #008743; font-size: .75rem; font-weight: 900; display: flex; align-items: center; gap: .35rem; }
-.camera-modal { width: min(100%, 620px); }
-.exam-camera-monitor { max-width: 280px; margin: 0 auto 1rem; }
-.camera-box.compact { padding: .55rem; }
-.camera-box.compact .camera-copy p { display: none; }
-.camera-box.compact .camera-preview-wrap { aspect-ratio: 4 / 3; }
-.camera-block { max-width: 620px; margin: 1.5rem auto; padding: 1.4rem; text-align: center; }
-.camera-block p { color: var(--muted); line-height: 1.5; }
-.question-media { max-width: 850px; margin: 1.2rem 0 0; }
-.question-media img, .view-question-image, .question-image-editor img { display: block; max-width: 100%; max-height: 280px; object-fit: contain; border: 2px solid var(--ink); background: #fff; }
-.view-question-image { max-height: 220px; }
-.media-upload { display: grid; gap: .35rem; font-size: .78rem; font-weight: 800; }
-.media-upload input { padding: .35rem; border: 2px dashed var(--ink); background: #fff; }
-.question-image-editor { display: flex; align-items: flex-start; gap: .7rem; flex-wrap: wrap; }
-.question-image-editor img { max-width: 180px; max-height: 110px; }
-@media (max-width: 600px) {
-  .exam-camera-monitor { max-width: 170px; margin: .7rem auto; }
-  .camera-box.compact .camera-ready { font-size: .65rem; }
-  .camera-modal .modal-actions { flex-direction: column; }
-  .camera-modal .modal-actions button { width: 100%; }
-  .question-media { margin-top: .8rem; }
-}
